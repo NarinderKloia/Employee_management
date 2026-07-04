@@ -41,8 +41,11 @@ public class EmpServicesImpl implements EmpServices {
     }
 
     @Override
-    public void deleteEmployee(Long id) {
+    public String deleteEmployee(Long id) {
+        Employee emp = getEmployeeById(id);
+        String name = emp.getName();
         repo.deleteById(id);
+        return name +" has been successfully deleted from database" ;
     }
 
 }

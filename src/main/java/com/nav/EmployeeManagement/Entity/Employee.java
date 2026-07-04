@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -23,7 +22,7 @@ public class Employee {
     @Column(name = "EmpName", nullable = false)
     private String Name;
 
-    @NotBlank
+    @Column(name = "EmpBranch", nullable = false)
     private String Branch;
 
     @Email

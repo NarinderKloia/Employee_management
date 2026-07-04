@@ -8,14 +8,14 @@ import com.nav.EmployeeManagement.Entity.Employee;
 
 @Service
 public interface EmpServices {
-    Employee addEmployee(Employee employee);
+        Employee addEmployee(Employee employee);
 
-    List<Employee> getEmployee();
+        List<Employee> getEmployee();
 
-    Employee updatEmployee(Long id, Employee employee);
+        Employee updatEmployee(Long id, Employee employee);
 
-    Employee getEmployeeById(Long id);
+        Employee getEmployeeById(Long id);
 
-    void deleteEmployee(Long id);
+        String deleteEmployee(Long id);
 
 }

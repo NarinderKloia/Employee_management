@@ -2,6 +2,12 @@ package com.nav.EmployeeManagement.Controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -11,29 +17,34 @@ import com.nav.EmployeeManagement.Services.impl.EmpServicesImpl;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("api/")
+@RequestMapping("api/employee")
 @RequiredArgsConstructor
 public class EmpController {
     public final EmpServicesImpl service;
 
-    Employee addEmployee(Employee employee) {
+    @PostMapping
+    Employee addEmployee(@RequestBody Employee employee) {
         return service.addEmployee(employee);
     };
 
+    @GetMapping
     List<Employee> getEmployee() {
         return service.getEmployee();
     };
 
-    Employee updatEmployee(Long id, Employee employee) {
+    @PutMapping("/{id}")
+    Employee updatEmployee(@PathVariable Long id, @RequestBody Employee employee) {
         return service.updatEmployee(id, employee);
     };
 
-    Employee getEmployeeById(Long id) {
+    @GetMapping("/{id}")
+    Employee getEmployeeById(@PathVariable Long id) {
         return service.getEmployeeById(id);
     };
 
-    void deleteEmployee(Long id) {
-        service.deleteEmployee(id);
+    @DeleteMapping("/{id}")
+    String deleteEmployee(@PathVariable Long id) {
+        return service.deleteEmployee(id);
     };
 
 }
