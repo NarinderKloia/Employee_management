@@ -1,37 +1,39 @@
 package com.nav.EmployeeManagement.Entity;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.hibernate.annotations.CreationTimestamp;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Getter
+@Table(name = "Branch")
 @Setter
-@Table(name = "Employees")
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
-public class Employee {
+@NoArgsConstructor
+public class Branch {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "EmpName", nullable = false)
-    private String Name;
+    @Column(name = "Branch", nullable = false)
+    private String BranchName;
 
-    @Email
-    private String Email;
+    @CreationTimestamp
+    private LocalDateTime CreatingTime;
 
-    @ManyToOne
-    @JoinColumn(name = "Branch_id")
-    private Branch branch;
+    @OneToMany(mappedBy = "branch")
+    private List<Employee> employee;
 }
