@@ -27,7 +27,7 @@ public class EmpController {
         return service.addEmployee(employee);
     };
 
-    @GetMapping
+    @GetMapping("/getall")
     List<Employee> getEmployee() {
         return service.getEmployee();
     };

@@ -4,19 +4,27 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+import com.nav.EmployeeManagement.Entity.Branch;
 import com.nav.EmployeeManagement.Entity.Employee;
+import com.nav.EmployeeManagement.Repository.BranchRepo;
 import com.nav.EmployeeManagement.Repository.EmpRepo;
 import com.nav.EmployeeManagement.Services.EmpServices;
-
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class EmpServicesImpl implements EmpServices {
     public final EmpRepo repo;
+    public final BranchRepo bRepo;
 
     @Override
     public Employee addEmployee(Employee employee) {
+
+        Branch branch = bRepo.findById(employee.getBranch().getId())
+                .orElseThrow(() -> new RuntimeException("Branch not found"));
+
+        employee.setBranch(branch);
+
         return repo.save(employee);
     }
 
@@ -45,7 +53,7 @@ public class EmpServicesImpl implements EmpServices {
         Employee emp = getEmployeeById(id);
         String name = emp.getName();
         repo.deleteById(id);
-        return name +" has been successfully deleted from database" ;
+        return name + " has been successfully deleted from database";
     }
 
 }
